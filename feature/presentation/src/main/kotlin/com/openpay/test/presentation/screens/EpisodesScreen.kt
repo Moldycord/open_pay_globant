@@ -16,28 +16,32 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.openpay.test.domain.model.Episode
+import com.openpay.test.feature.presentation.R
 import com.openpay.test.presentation.viewmodels.EpisodesViewModel
+import com.openpay.test.presentation.views.ErrorDialog
 
 @Composable
 fun EpisodesScreen(viewModel: EpisodesViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
+    val searchLabel = stringResource(R.string.search_episode)
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(dimensionResource(R.dimen.spacing_large))
     ) {
         OutlinedTextField(
             value = state.searchQuery,
             onValueChange = viewModel::onSearch,
-            label = { Text("Buscar episodio") },
+            label = { Text(searchLabel) },
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_medium)))
 
         LazyColumn {
             itemsIndexed(state.episodes) { index, episode ->
@@ -52,11 +56,18 @@ fun EpisodesScreen(viewModel: EpisodesViewModel = hiltViewModel()) {
                 item {
                     CircularProgressIndicator(
                         modifier = Modifier
-                            .padding(16.dp)
+                            .padding(dimensionResource(R.dimen.spacing_large))
                             .align(Alignment.CenterHorizontally)
                     )
                 }
             }
+        }
+        if (state.errorMessage.isNotEmpty()) {
+            ErrorDialog(
+                message = state.errorMessage,
+                onRetry = { viewModel.loadNextPage() },
+                onDismiss = { viewModel.clearError() }
+            )
         }
     }
 
@@ -67,9 +78,9 @@ fun EpisodeItem(episode: Episode) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(vertical = dimensionResource(R.dimen.spacing_medium))
     ) {
         Text(text = episode.name, fontWeight = FontWeight.Bold)
-        Text(text = "Fecha de emisión: ${episode.airDate}")
+        Text(text = stringResource(R.string.air_date_label, episode.airDate))
     }
 }

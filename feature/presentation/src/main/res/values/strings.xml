@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="error_unknown">Error desconocido</string>
+
+    <string name="error_label">Error</string>
+
+    <string name="search_episode">Buscar episodio</string>
+
+    <string name="search_character">Buscar personaje</string>
+
+    <string name="air_date_label">Fecha de emisión: %s</string>
+
+    <string name="episodes_label">Episodios</string>
+
+    <string name="characters_label">Personajes</string>
+
+    <string name="retry_label">Retry</string>
+
+    <string name="location_label">Ubicación: %s</string>
+
+    <string name="first_episode_label">Primer episodio: $s</string>
+</resources>

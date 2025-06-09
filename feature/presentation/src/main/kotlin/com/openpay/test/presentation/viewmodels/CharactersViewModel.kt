@@ -1,9 +1,11 @@
 package com.openpay.test.presentation.viewmodels
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.openpay.test.domain.model.Character
 import com.openpay.test.domain.usecase.GetCharactersUseCase
+import com.openpay.test.feature.presentation.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,8 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
+    application: Application,
     private val getCharactersUseCase: GetCharactersUseCase
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
     private val _uiState = MutableStateFlow(CharactersUiState())
     val uiState: StateFlow<CharactersUiState> = _uiState
@@ -42,22 +45,40 @@ class CharactersViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            val result = getCharactersUseCase(currentState.page)
-            val filtered = if (currentState.searchQuery.isNotBlank()) {
-                result.items.filter {
-                    it.name.contains(currentState.searchQuery, ignoreCase = true)
-                }
-            } else result.items
+            try {
+                val result = getCharactersUseCase(currentState.page)
+                val filtered = if (currentState.searchQuery.isNotBlank()) {
+                    result.items.filter {
+                        it.name.contains(currentState.searchQuery, ignoreCase = true)
+                    }
+                } else result.items
 
-            _uiState.update {
-                it.copy(
-                    characters = if (reset) filtered else it.characters + filtered,
-                    page = (it.page + 1),
-                    hasNextPage = result.nextPage != null,
-                    isLoading = false
-                )
+                _uiState.update {
+                    it.copy(
+                        characters = if (reset) filtered else it.characters + filtered,
+                        page = (it.page + 1),
+                        hasNextPage = result.nextPage != null,
+                        isLoading = false
+                    )
+                }
+            } catch (error: Exception) {
+                _uiState.update {
+                    val errorMessage =
+                        error.localizedMessage ?: getApplication<Application>()
+                            .getString(
+                                R.string.error_unknown
+                            )
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = errorMessage
+                    )
+                }
             }
         }
+    }
+
+    fun clearError() {
+        _uiState.update { it.copy(errorMessage = "") }
     }
 }
 
@@ -66,5 +87,6 @@ data class CharactersUiState(
     val page: Int = 1,
     val hasNextPage: Boolean = true,
     val isLoading: Boolean = false,
-    val searchQuery: String = ""
+    val searchQuery: String = "",
+    val errorMessage: String = ""
 )
