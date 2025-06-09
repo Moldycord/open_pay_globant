@@ -12,7 +12,7 @@ data class AllCharactersResponseModel(
 data class InfoResponseModel(
     val count: Int,
     val pages: Int,
-    val next: String,
+    val next: String?,
     val prev: String?
 )
 

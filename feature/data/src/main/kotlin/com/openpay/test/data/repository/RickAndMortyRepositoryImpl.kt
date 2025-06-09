@@ -17,7 +17,7 @@ class RickAndMortyRepositoryImpl @Inject constructor(
         return rickAndMortyService.getCharacters(page).toDomain()
     }
 
-    override suspend fun getEpisodes(): PaginatedResult<Episode> {
+    override suspend fun getEpisodes(page: Int): PaginatedResult<Episode> {
         return rickAndMortyService.getEpisodes().toDomain()
     }
 }

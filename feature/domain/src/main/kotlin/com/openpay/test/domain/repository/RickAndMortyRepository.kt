@@ -8,6 +8,6 @@ interface RickAndMortyRepository {
 
     suspend fun getCharacters(page: Int): PaginatedResult<Character>
 
-    suspend fun getEpisodes(): PaginatedResult<Episode>
+    suspend fun getEpisodes(page: Int): PaginatedResult<Episode>
 
 }
