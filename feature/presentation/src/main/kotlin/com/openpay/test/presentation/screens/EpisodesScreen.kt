@@ -20,13 +20,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.openpay.test.domain.model.Episode
 import com.openpay.test.feature.presentation.R
 import com.openpay.test.presentation.viewmodels.EpisodesViewModel
 import com.openpay.test.presentation.views.ErrorDialog
 
 @Composable
-fun EpisodesScreen(viewModel: EpisodesViewModel = hiltViewModel()) {
+fun EpisodesScreen(navController: NavController, viewModel: EpisodesViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
     val searchLabel = stringResource(R.string.search_episode)
     Column(
@@ -65,8 +66,14 @@ fun EpisodesScreen(viewModel: EpisodesViewModel = hiltViewModel()) {
         if (state.errorMessage.isNotEmpty()) {
             ErrorDialog(
                 message = state.errorMessage,
-                onRetry = { viewModel.loadNextPage() },
-                onDismiss = { viewModel.clearError() }
+                onRetry = {
+                    viewModel.clearError()
+                    viewModel.loadNextPage()
+                },
+                onDismiss = {
+                    viewModel.clearError()
+                    navController.popBackStack()
+                }
             )
         }
     }

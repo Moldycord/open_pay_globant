@@ -14,7 +14,7 @@ import com.openpay.test.presentation.screens.HomeScreen
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) { HomeScreen(navController) }
-        composable(Screen.Characters.route) { CharactersScreen() }
-        composable(Screen.Episodes.route) { EpisodesScreen() }
+        composable(Screen.Characters.route) { CharactersScreen(navController) }
+        composable(Screen.Episodes.route) { EpisodesScreen(navController) }
     }
 }

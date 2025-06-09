@@ -26,6 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.openpay.test.domain.model.Character
 import com.openpay.test.feature.presentation.R
@@ -33,7 +34,10 @@ import com.openpay.test.presentation.viewmodels.CharactersViewModel
 import com.openpay.test.presentation.views.ErrorDialog
 
 @Composable
-fun CharactersScreen(viewModel: CharactersViewModel = hiltViewModel()) {
+fun CharactersScreen(
+    navController: NavController,
+    viewModel: CharactersViewModel = hiltViewModel()
+) {
     val state by viewModel.uiState.collectAsState()
 
     Column(
@@ -73,8 +77,14 @@ fun CharactersScreen(viewModel: CharactersViewModel = hiltViewModel()) {
         if (state.errorMessage.isNotEmpty()) {
             ErrorDialog(
                 message = state.errorMessage,
-                onRetry = { viewModel.loadNextPage() },
-                onDismiss = { viewModel.clearError() }
+                onRetry = {
+                    viewModel.clearError()
+                    viewModel.loadNextPage()
+                },
+                onDismiss = {
+                    viewModel.clearError()
+                    navController.popBackStack()
+                }
             )
         }
     }

@@ -37,10 +37,10 @@ class CharactersViewModel @Inject constructor(
                 hasNextPage = true
             )
         }
-        loadNextPage(reset = true, searchQuery = query)
+        loadNextPage(reset = true)
     }
 
-    fun loadNextPage(reset: Boolean = false, searchQuery: String = "") {
+    fun loadNextPage(reset: Boolean = false) {
         val currentState = _uiState.value
         if (!currentState.hasNextPage || currentState.isLoading) return
 
@@ -49,9 +49,9 @@ class CharactersViewModel @Inject constructor(
 
             try {
                 val result = getCharactersUseCase(currentState.page)
-                val filtered = if (searchQuery.isNotBlank()) {
+                val filtered = if (currentState.searchQuery.isNotBlank()) {
                     result.items.filter {
-                        it.name.contains(searchQuery, ignoreCase = true)
+                        it.name.contains(currentState.searchQuery, ignoreCase = true)
                     }
                 } else result.items
 

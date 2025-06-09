@@ -17,6 +17,8 @@
 
     <string name="retry_label">Retry</string>
 
+    <string name="go_back_label">Regresar</string>
+
     <string name="location_label">Ubicación: %s</string>
 
     <string name="first_episode_label">Primer episodio: $s</string>

@@ -8,17 +8,27 @@ import androidx.compose.ui.res.stringResource
 import com.openpay.test.feature.presentation.R
 
 @Composable
-fun ErrorDialog(message: String, onRetry: () -> Unit, onDismiss: () -> Unit) {
+fun ErrorDialog(
+    message: String,
+    onRetry: () -> Unit,
+    onDismiss: () -> Unit
+) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.error_label)) },
         text = { Text(message) },
         confirmButton = {
             TextButton(onClick = {
-                onDismiss()
                 onRetry()
             }) {
                 Text(stringResource(R.string.retry_label))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = {
+                onDismiss()
+            }) {
+                Text(stringResource(R.string.go_back_label))
             }
         }
     )
