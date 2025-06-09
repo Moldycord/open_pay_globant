@@ -21,6 +21,8 @@ network/: Modulo para proveer un cliente de Retrofit, configurado para inyectars
 
 *Tecnologías utilizadas:*
 
+Android Studio : Meerkat feature 2024.3.2 
+AGP :"8.10.0-rc02"
 Jetpack compose para los elementos visuales
 Jetpack Navigation compose para la navegación entre las distintas pantallas
 Inyección de dependencias con Hilt:
