@@ -1,6 +1,8 @@
 *Rick and Morty App*
 
-Aplicación sencilla para la búsqueda de personajes y episodios de Rick y Morty
+Aplicación sencilla para la búsqueda de personajes y episodios de Rick y Morty.
+Al final añado evidencia de los branches y commits utilizados para la aplicación, solo que tuve que
+migrar el repo a mi cuenta personal ya que en la de globant no permite poner repos publicos
 
 *Estructura:*
 La aplicación contiene los siguientes módulos
@@ -59,6 +61,13 @@ Para el test utilice
 ![Tests](screenshots/test1.webp)
 
 ![Test ViewModel](screenshots/test2.webp)
+
+*GIT*
+
+![Commits](screenshots/commits.png)
+
+![branches](screenshots/branches.png)
+
 
 
 
