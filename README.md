@@ -48,9 +48,9 @@ Para el test utilice
 
 ![Pantalla principal](screenshots/home.jpg)
 
-![Personajes](screenshots/personajes.jpg)
+![Personajes](screenshots/Personajes.png)
 
-![Buscar personaje](screenshots/buscar_personaje.jpg)
+![Buscar personaje](screenshots/personajes_buscador.png)
 
 ![Episodios](screenshots/buscar_episodio.jpg)
 
