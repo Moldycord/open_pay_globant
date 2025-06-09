@@ -58,7 +58,7 @@ class RickAndMortyRepositoryImplTest {
         )
         val expected = response.toDomain()
 
-        coEvery { service.getEpisodes() } returns response
+        coEvery { service.getEpisodes(1) } returns response
 
         val result = repository.getEpisodes(1)
 
