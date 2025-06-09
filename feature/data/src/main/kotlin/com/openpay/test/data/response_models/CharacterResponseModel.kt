@@ -1,10 +1,14 @@
 package com.openpay.test.data.response_models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class AllCharactersResponseModel(
     val info: InfoResponseModel,
     val results: List<CharacterResponseModel>
 )
 
+@Serializable
 data class InfoResponseModel(
     val count: Int,
     val pages: Int,
@@ -12,6 +16,7 @@ data class InfoResponseModel(
     val prev: String?
 )
 
+@Serializable
 data class CharacterResponseModel(
     val id: Int,
     val name: String,
@@ -20,6 +25,7 @@ data class CharacterResponseModel(
     val location: LocationCharacterResponseModel
 )
 
+@Serializable
 data class LocationCharacterResponseModel(
     val name: String,
     val url: String

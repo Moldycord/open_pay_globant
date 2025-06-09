@@ -10,7 +10,9 @@ fun AllCharactersResponseModel.toDomain(): PaginatedResult<Character> {
             Character(
                 id = item.id,
                 image = item.image,
-                name = item.name
+                name = item.name,
+                location = item.location.name,
+                firstEpisode = item.episode.first()
             )
         },
         nextPage = info.next?.substringAfter("page=")?.toIntOrNull(),
