@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.openpay.test.domain.model.Episode
+import com.openpay.test.domain.providers.ResourceProvider
 import com.openpay.test.domain.usecase.GetEpisodesUseCase
 import com.openpay.test.feature.presentation.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class EpisodesViewModel @Inject constructor(
     application: Application,
-    private val getEpisodesUseCase: GetEpisodesUseCase
+    private val getEpisodesUseCase: GetEpisodesUseCase,
+    private val resourceProvider: ResourceProvider
 ) : AndroidViewModel(application) {
     private val _uiState = MutableStateFlow(EpisodesUiState())
     val uiState: StateFlow<EpisodesUiState> = _uiState
@@ -68,7 +70,7 @@ class EpisodesViewModel @Inject constructor(
             } catch (error: Exception) {
                 _uiState.update {
                     val errorMessage =
-                        error.localizedMessage ?: getApplication<Application>()
+                        error.localizedMessage ?: resourceProvider
                             .getString(
                                 R.string.error_unknown
                             )

@@ -19,6 +19,8 @@ kotlinxSerializationJson = "1.7.3"
 retrofitKotlinxSerializationJson = "1.0.0"
 coil = "2.5.0"
 mockkVersion = "1.13.13"
+kotlinx-coroutines = "1.7.3"
+turbine = "1.0.0"
 
 
 [libraries]
@@ -48,6 +50,9 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.1.0" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 mockK = { module = "io.mockk:mockk", version.ref = "mockkVersion" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+arch-core-testing = { module = "androidx.arch.core:core-testing", version = "2.2.0" }
 
 
 [plugins]
