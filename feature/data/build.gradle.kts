@@ -29,4 +29,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.kotlin.serialization)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockK)
 }
