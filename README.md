@@ -54,6 +54,12 @@ Para el test utilice
 
 ![Pantalla de error](screenshots/error.jpg)
 
+*TESTS*
+
+![Tests](screenshots/test1.webp)
+
+![Test ViewModel](screenshots/test2.webp)
+
 
 
 
